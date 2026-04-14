@@ -48,6 +48,11 @@ openclaw plugins install .
 
 See [docs/openclaw-setup.md](/root/clawd/github/active/linear-tasks/docs/openclaw-setup.md) for the recommended OpenClaw config and intake flow.
 
+`linear-tasks` can be enabled together with `openclaw-linear`. The intended split is:
+
+- `linear-tasks` for intake and issue creation
+- `openclaw-linear` for webhook routing, queue handling, comments, and ongoing issue operations
+
 ## Example
 
 Preview:
