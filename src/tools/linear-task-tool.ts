@@ -87,6 +87,11 @@ export function createLinearTaskTool(api: OpenClawPluginApi): AnyAgentTool {
           });
         }
 
+        const validationError = validateCreateParams(params);
+        if (validationError) {
+          return jsonResult({ error: validationError });
+        }
+
         const teamKey = params.team ?? defaults.defaultTeamKey;
         if (!teamKey) {
           return jsonResult({ error: "team is required when no defaultTeamKey is configured" });
@@ -165,3 +170,26 @@ function asNumber(value: unknown): number | undefined {
   return typeof value === "number" ? value : undefined;
 }
 
+function validateCreateParams(params: Params): string | null {
+  if (!hasText(params.context)) {
+    return "context is required for create";
+  }
+  if (!hasText(params.goal)) {
+    return "goal is required for create";
+  }
+  if (!hasNonEmptyArray(params.acceptanceCriteria)) {
+    return "acceptanceCriteria must contain at least one item for create";
+  }
+  if (!hasNonEmptyArray(params.validation)) {
+    return "validation must contain at least one item for create";
+  }
+  return null;
+}
+
+function hasText(value: string | undefined): boolean {
+  return typeof value === "string" && value.trim().length > 0;
+}
+
+function hasNonEmptyArray(value: string[] | undefined): boolean {
+  return Array.isArray(value) && value.some((item) => item.trim().length > 0);
+}

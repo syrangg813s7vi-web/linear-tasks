@@ -28,6 +28,8 @@ Strongly recommended fields:
 - `acceptanceCriteria`
 - `validation`
 
+For `create`, these are treated as required inputs. Use `preview` if the task is still underspecified.
+
 Optional structured fields:
 
 - `summary`
@@ -51,4 +53,3 @@ When creating a task:
 2. Fill `context`, `goal`, `acceptanceCriteria`, and `validation` before calling `create`.
 3. Use `preview` first if the task framing is still being checked.
 4. Use actual newlines in any long text fields.
-

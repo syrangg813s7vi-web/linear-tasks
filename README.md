@@ -17,11 +17,19 @@ The plugin registers one tool:
   - `preview`: render the final issue body without creating anything
   - `create`: create the Linear issue
 
+For `create`, these fields are required:
+
+- `title`
+- `context`
+- `goal`
+- `acceptanceCriteria` with at least one item
+- `validation` with at least one item
+
 ## Config
 
 ```yaml
 plugins:
-  linearTasks:
+  linear-tasks:
     apiKey: "lin_api_..."
     defaultTeamKey: "TIN"
     defaultProject: "claw-tasks"
@@ -29,3 +37,51 @@ plugins:
     defaultPriority: 3
 ```
 
+## Install
+
+```bash
+cd /root/clawd/github/active/linear-tasks
+npm install
+npm run build
+openclaw plugins install .
+```
+
+## Example
+
+Preview:
+
+```json
+{
+  "action": "preview",
+  "title": "define linear intake template for openclaw tasks",
+  "context": "OpenClaw needs a stable way to submit executable tasks into Linear.",
+  "goal": "Produce a standard issue body that Symphony can pick up without guessing.",
+  "acceptanceCriteria": [
+    "The issue includes context, goal, acceptance criteria, and validation",
+    "The task stays scoped to intake and does not expand into execution"
+  ],
+  "validation": [
+    "Render the final issue body and inspect the section structure"
+  ]
+}
+```
+
+Create:
+
+```json
+{
+  "action": "create",
+  "title": "define linear intake template for openclaw tasks",
+  "context": "OpenClaw needs a stable way to submit executable tasks into Linear.",
+  "goal": "Produce a standard issue body that Symphony can pick up without guessing.",
+  "acceptanceCriteria": [
+    "The issue includes context, goal, acceptance criteria, and validation"
+  ],
+  "validation": [
+    "Create one sample issue in the claw-tasks project"
+  ],
+  "project": "claw-tasks",
+  "state": "Todo",
+  "priority": 3
+}
+```
