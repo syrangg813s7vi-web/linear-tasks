@@ -1,6 +1,6 @@
 # OpenClaw Setup
 
-Use this package when OpenClaw should standardize a task request before handing issue creation to `openclaw-linear`.
+Use this spec when OpenClaw should standardize a task request before handing issue creation to `openclaw-linear`.
 
 ## Install
 
@@ -21,7 +21,7 @@ openclaw plugins install .
 Recommended split:
 
 - `linear-tasks`
-  - turns an intake request into a templated Linear issue
+  - turns an intake request into a templated issue draft
   - owns the task description contract
 - `openclaw-linear`
   - owns webhook intake, queueing, comments, project queries, and issue follow-up work
@@ -43,7 +43,7 @@ plugins:
 The important point is that the plugin ids are different:
 
 - `linear` for `openclaw-linear`
-- `linear-tasks` is this package's id, but it does not require runtime config
+- `linear-tasks` is this spec package's id, but it does not require runtime config
 
 They do not conflict because only `openclaw-linear` owns the live Linear integration.
 

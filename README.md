@@ -1,6 +1,6 @@
 # linear-tasks
 
-`linear-tasks` is a thin OpenClaw skill package for standardizing Linear task intake.
+`linear-tasks` is a thin OpenClaw task-intake spec for standardizing how tasks are written before they enter Linear.
 
 It is intended for the workflow:
 
@@ -11,7 +11,7 @@ It is intended for the workflow:
 
 ## Dependency
 
-This package does not create or update Linear issues by itself.
+This spec does not create or update Linear issues by itself.
 
 It is designed to be used with `openclaw-linear`, specifically:
 
@@ -67,7 +67,7 @@ Use the template in [examples/issue-body-template.md](/root/clawd/github/active/
 
 Recommended split:
 
-- `linear-tasks` for intake and issue creation
+- `linear-tasks` for intake and issue framing
 - `openclaw-linear` for webhook routing, queue handling, comments, and ongoing issue operations
 
 Reusable example payloads:

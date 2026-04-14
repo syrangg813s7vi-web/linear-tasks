@@ -1,6 +1,6 @@
 {
   "id": "linear-tasks",
   "name": "Linear Tasks",
-  "description": "Task intake skill that standardizes Linear issue descriptions for Symphony-driven execution",
+  "description": "Task intake spec that standardizes Linear issue descriptions for Symphony-driven execution",
   "skills": ["./skills"]
 }

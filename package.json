@@ -1,7 +1,7 @@
 {
   "name": "linear-tasks",
   "version": "0.1.0",
-  "description": "OpenClaw task-intake skill that standardizes Linear issue descriptions",
+  "description": "OpenClaw task-intake spec that standardizes Linear issue descriptions",
   "files": [
     "skills",
     "openclaw.plugin.json",

@@ -6,7 +6,7 @@ metadata: { "openclaw": { "always": true, "emoji": "🧾", "requires": { "config
 
 # Linear Tasks
 
-Use this skill when OpenClaw needs to send a new executable task into Linear through `openclaw-linear`.
+Use this skill when OpenClaw needs to turn a task request into a well-formed Linear issue draft for `openclaw-linear`.
 
 ## Required tool
 
@@ -34,7 +34,7 @@ When creating a task:
    - `Acceptance Criteria`
    - `Validation`
 4. Use actual newlines in the markdown body.
-5. Create the issue with `linear_issue`, not with this package.
+5. Create the issue with `linear_issue`, not with this spec.
 
 ## Example
 
