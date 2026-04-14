@@ -1,0 +1,17 @@
+{
+  "action": "preview",
+  "title": "define openclaw linear intake template",
+  "context": "OpenClaw needs a stable way to submit executable tasks into Linear.",
+  "goal": "Produce a standard issue body that Symphony can pick up without guessing.",
+  "acceptanceCriteria": [
+    "The issue includes context, goal, acceptance criteria, and validation",
+    "The task stays scoped to intake and does not expand into execution"
+  ],
+  "validation": [
+    "Render the final issue body and inspect the section structure"
+  ],
+  "project": "claw-tasks",
+  "state": "Todo",
+  "priority": 3
+}
+

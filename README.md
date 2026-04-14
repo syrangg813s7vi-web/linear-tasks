@@ -46,6 +46,8 @@ npm run build
 openclaw plugins install .
 ```
 
+See [docs/openclaw-setup.md](/root/clawd/github/active/linear-tasks/docs/openclaw-setup.md) for the recommended OpenClaw config and intake flow.
+
 ## Example
 
 Preview:
@@ -85,3 +87,8 @@ Create:
   "priority": 3
 }
 ```
+
+Reusable example payloads:
+
+- [examples/preview-task.json](/root/clawd/github/active/linear-tasks/examples/preview-task.json)
+- [examples/create-task.json](/root/clawd/github/active/linear-tasks/examples/create-task.json)
