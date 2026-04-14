@@ -1,33 +1,19 @@
 {
   "name": "linear-tasks",
   "version": "0.1.0",
-  "description": "OpenClaw plugin for creating templated Linear task issues",
-  "type": "module",
-  "main": "dist/index.js",
-  "types": "dist/index.d.ts",
-  "exports": {
-    ".": {
-      "import": "./dist/index.js",
-      "types": "./dist/index.d.ts"
-    }
-  },
+  "description": "OpenClaw task-intake skill that standardizes Linear issue descriptions",
   "files": [
-    "dist",
     "skills",
     "openclaw.plugin.json",
-    "README.md"
+    "README.md",
+    "docs",
+    "examples"
   ],
-  "scripts": {
-    "build": "tsc",
-    "clean": "rm -rf dist",
-    "prepack": "npm run build",
-    "test": "vitest run"
-  },
   "keywords": [
     "openclaw",
     "linear",
     "tasks",
-    "plugin"
+    "skill"
   ],
   "author": "syrangg813s7vi-web",
   "license": "MIT",
@@ -37,22 +23,5 @@
   },
   "engines": {
     "node": ">=20"
-  },
-  "dependencies": {
-    "@sinclair/typebox": "^0.34.41"
-  },
-  "peerDependencies": {
-    "openclaw": ">=2026.3.24"
-  },
-  "devDependencies": {
-    "openclaw": "^2026.4.2",
-    "typescript": "^5.7.0",
-    "vitest": "^4.0.18"
-  },
-  "openclaw": {
-    "extensions": [
-      "./dist/index.js"
-    ]
   }
 }
-

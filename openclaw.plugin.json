@@ -1,35 +1,6 @@
 {
   "id": "linear-tasks",
   "name": "Linear Tasks",
-  "description": "Create Linear issues from a standard task template for Symphony-driven execution",
-  "skills": ["./skills"],
-  "configSchema": {
-    "type": "object",
-    "additionalProperties": false,
-    "properties": {
-      "apiKey": {
-        "type": "string",
-        "sensitive": true,
-        "description": "Linear API key used for GraphQL requests"
-      },
-      "defaultTeamKey": {
-        "type": "string",
-        "description": "Default Linear team key used when a tool call omits team"
-      },
-      "defaultProject": {
-        "type": "string",
-        "description": "Default Linear project name used when a tool call omits project"
-      },
-      "defaultState": {
-        "type": "string",
-        "description": "Default workflow state name used when a tool call omits state"
-      },
-      "defaultPriority": {
-        "type": "integer",
-        "description": "Default issue priority: 0=None, 1=Urgent, 2=High, 3=Medium, 4=Low"
-      }
-    },
-    "required": ["apiKey"]
-  }
+  "description": "Task intake skill that standardizes Linear issue descriptions for Symphony-driven execution",
+  "skills": ["./skills"]
 }
-

@@ -1,99 +1,76 @@
 # linear-tasks
 
-`linear-tasks` is a thin OpenClaw plugin for creating Linear issues from a standard task template.
+`linear-tasks` is a thin OpenClaw skill package for standardizing Linear task intake.
 
 It is intended for the workflow:
 
 - OpenClaw receives a task request
-- `linear-tasks` formats the issue body with the agreed template
-- The plugin creates the issue in Linear
+- `linear-tasks` provides the agreed issue template and intake rules
+- `openclaw-linear` creates the issue in Linear through `linear_issue`
 - Symphony picks the issue up and executes it
 
-## Tool
+## Dependency
 
-The plugin registers one tool:
+This package does not create or update Linear issues by itself.
 
-- `linear_task`
-  - `preview`: render the final issue body without creating anything
-  - `create`: create the Linear issue
+It is designed to be used with `openclaw-linear`, specifically:
 
-For `create`, these fields are required:
+- `linear_issue`
+- optionally `linear_comment`, `linear_project`, and other follow-up tools from `openclaw-linear`
 
-- `title`
-- `context`
-- `goal`
-- `acceptanceCriteria` with at least one item
-- `validation` with at least one item
+## Required Structure
 
-## Config
+When creating a task issue, the final description should include:
 
-```yaml
-plugins:
-  linear-tasks:
-    apiKey: "lin_api_..."
-    defaultTeamKey: "TIN"
-    defaultProject: "claw-tasks"
-    defaultState: "Todo"
-    defaultPriority: 3
-```
+- `Summary`
+- `Context`
+- `Goal`
+- `Scope`
+- `Acceptance Criteria`
+- `Validation`
+- `Inputs / References`
+- `Constraints`
+- `Expected Output`
+- `Notes`
+
+Minimum required sections:
+
+- `Context`
+- `Goal`
+- `Acceptance Criteria`
+- `Validation`
 
 ## Install
 
 ```bash
 cd /root/clawd/github/active/linear-tasks
-npm install
-npm run build
 openclaw plugins install .
 ```
 
-See [docs/openclaw-setup.md](/root/clawd/github/active/linear-tasks/docs/openclaw-setup.md) for the recommended OpenClaw config and intake flow.
+See [docs/openclaw-setup.md](/root/clawd/github/active/linear-tasks/docs/openclaw-setup.md) for the recommended setup with `openclaw-linear`.
 
-`linear-tasks` can be enabled together with `openclaw-linear`. The intended split is:
+## Usage
 
-- `linear-tasks` for intake and issue creation
-- `openclaw-linear` for webhook routing, queue handling, comments, and ongoing issue operations
-
-## Example
-
-Preview:
-
-```json
-{
-  "action": "preview",
-  "title": "define linear intake template for openclaw tasks",
-  "context": "OpenClaw needs a stable way to submit executable tasks into Linear.",
-  "goal": "Produce a standard issue body that Symphony can pick up without guessing.",
-  "acceptanceCriteria": [
-    "The issue includes context, goal, acceptance criteria, and validation",
-    "The task stays scoped to intake and does not expand into execution"
-  ],
-  "validation": [
-    "Render the final issue body and inspect the section structure"
-  ]
-}
-```
-
-Create:
+Use the template in [examples/issue-body-template.md](/root/clawd/github/active/linear-tasks/examples/issue-body-template.md), then create the issue with `openclaw-linear`:
 
 ```json
 {
   "action": "create",
-  "title": "define linear intake template for openclaw tasks",
-  "context": "OpenClaw needs a stable way to submit executable tasks into Linear.",
-  "goal": "Produce a standard issue body that Symphony can pick up without guessing.",
-  "acceptanceCriteria": [
-    "The issue includes context, goal, acceptance criteria, and validation"
-  ],
-  "validation": [
-    "Create one sample issue in the claw-tasks project"
-  ],
+  "title": "define openclaw linear intake template",
+  "description": "<rendered markdown issue body>",
+  "team": "TIN",
   "project": "claw-tasks",
   "state": "Todo",
   "priority": 3
 }
 ```
 
+Recommended split:
+
+- `linear-tasks` for intake and issue creation
+- `openclaw-linear` for webhook routing, queue handling, comments, and ongoing issue operations
+
 Reusable example payloads:
 
-- [examples/preview-task.json](/root/clawd/github/active/linear-tasks/examples/preview-task.json)
 - [examples/create-task.json](/root/clawd/github/active/linear-tasks/examples/create-task.json)
+- [examples/issue-body-template.md](/root/clawd/github/active/linear-tasks/examples/issue-body-template.md)

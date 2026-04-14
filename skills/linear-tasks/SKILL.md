@@ -1,55 +1,51 @@
 ---
 name: linear-tasks
-description: Create Linear issues from the standard OpenClaw task template so Symphony can pick them up with clear context, acceptance criteria, validation, and expected output.
-metadata: { "openclaw": { "always": true, "emoji": "🧾", "requires": { "config": ["extensions.linear-tasks"] } } }
+description: Standardize Linear task intake so OpenClaw can use openclaw-linear to create issues with clear context, acceptance criteria, validation, and expected output.
+metadata: { "openclaw": { "always": true, "emoji": "🧾", "requires": { "config": ["extensions.openclaw-linear"] } } }
 ---
 
 # Linear Tasks
 
-Use `linear_task` when OpenClaw needs to send a new executable task into Linear.
+Use this skill when OpenClaw needs to send a new executable task into Linear through `openclaw-linear`.
 
-## Tool
+## Required tool
 
-### `linear_task`
-
-| Action | Purpose |
-|---|---|
-| `preview` | Render the final issue body without creating the issue. |
-| `create` | Render the issue body and create the issue in Linear. |
-
-Required:
-
-- `title`
-
-Strongly recommended fields:
-
-- `context`
-- `goal`
-- `acceptanceCriteria`
-- `validation`
-
-For `create`, these are treated as required inputs. Use `preview` if the task is still underspecified.
-
-Optional structured fields:
-
-- `summary`
-- `inScope`
-- `outOfScope`
-- `inputs`
-- `constraints`
-- `expectedOutput`
-- `notes`
-- `team`
-- `project`
-- `state`
-- `priority`
-- `labels`
+Use `linear_issue` from `openclaw-linear` with `action: "create"`.
 
 ## Working rule
 
 When creating a task:
 
 1. Make the title specific and action-oriented.
-2. Fill `context`, `goal`, `acceptanceCriteria`, and `validation` before calling `create`.
-3. Use `preview` first if the task framing is still being checked.
-4. Use actual newlines in any long text fields.
+2. Build the issue description with these sections:
+   - `Summary`
+   - `Context`
+   - `Goal`
+   - `Scope`
+   - `Acceptance Criteria`
+   - `Validation`
+   - `Inputs / References`
+   - `Constraints`
+   - `Expected Output`
+   - `Notes`
+3. Treat these as mandatory before creation:
+   - `Context`
+   - `Goal`
+   - `Acceptance Criteria`
+   - `Validation`
+4. Use actual newlines in the markdown body.
+5. Create the issue with `linear_issue`, not with this package.
+
+## Example
+
+```json
+{
+  "action": "create",
+  "title": "define openclaw linear intake template",
+  "description": "<rendered markdown issue body>",
+  "team": "TIN",
+  "project": "claw-tasks",
+  "state": "Todo",
+  "priority": 3
+}
+```

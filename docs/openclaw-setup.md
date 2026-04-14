@@ -1,27 +1,18 @@
 # OpenClaw Setup
 
-Use this plugin when OpenClaw should turn a task request into a Linear issue that Symphony can execute.
+Use this package when OpenClaw should standardize a task request before handing issue creation to `openclaw-linear`.
 
 ## Install
 
 ```bash
 cd /root/clawd/github/active/linear-tasks
-npm install
-npm run build
 openclaw plugins install .
 ```
 
-## Minimal Config
+## Runtime Model
 
-```yaml
-plugins:
-  linear-tasks:
-    apiKey: "lin_api_..."
-    defaultTeamKey: "TIN"
-    defaultProject: "claw-tasks"
-    defaultState: "Todo"
-    defaultPriority: 3
-```
+- `linear-tasks` provides the intake rules, template, and examples
+- `openclaw-linear` performs the actual Linear operations
 
 ## Use With `openclaw-linear`
 
@@ -47,43 +38,18 @@ plugins:
     teamIds: ["TIN"]
     eventFilter: ["Issue", "Comment"]
 
-  linear-tasks:
-    apiKey: "lin_api_..."
-    defaultTeamKey: "TIN"
-    defaultProject: "claw-tasks"
-    defaultState: "Todo"
-    defaultPriority: 3
 ```
 
 The important point is that the plugin ids are different:
 
 - `linear` for `openclaw-linear`
-- `linear-tasks` for this plugin
+- `linear-tasks` is this package's id, but it does not require runtime config
 
-They do not conflict as long as both are configured under their own ids.
-
-## Recommended Runtime Defaults
-
-- `defaultTeamKey`: `TIN`
-- `defaultProject`: `claw-tasks`
-- `defaultState`: `Todo`
-- `defaultPriority`: `3`
-
-These defaults match the current `claw-tasks` intake flow and reduce repeated parameters on each tool call.
+They do not conflict because only `openclaw-linear` owns the live Linear integration.
 
 ## Usage Pattern
 
-1. Call `linear_task` with `action: "preview"` while framing the task.
-2. Check that `context`, `goal`, `acceptanceCriteria`, and `validation` are specific enough.
-3. Call `linear_task` with `action: "create"` once the task body is ready.
+1. Use [examples/issue-body-template.md](/root/clawd/github/active/linear-tasks/examples/issue-body-template.md) to draft the issue body.
+2. Ensure `Context`, `Goal`, `Acceptance Criteria`, and `Validation` are filled.
+3. Use `openclaw-linear`'s `linear_issue` with `action: "create"` to submit the issue.
 4. Let Symphony pick up the resulting Linear issue from the `claw-tasks` project.
-
-## Required Inputs For Create
-
-- `title`
-- `context`
-- `goal`
-- `acceptanceCriteria` with at least one item
-- `validation` with at least one item
-
-If any of these are missing, the tool will reject the create request.
